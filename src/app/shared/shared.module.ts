@@ -1,9 +1,9 @@
-import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { HeadersPipe } from './pipes/headers.pipe';
 
 @NgModule({
   imports: [],
-  exports: [],
-  declarations: []
+  exports: [HeadersPipe],
+  declarations: [HeadersPipe]
 })
 export class SharedModule { }

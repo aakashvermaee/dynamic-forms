@@ -21,10 +21,7 @@ export class BookingInfoListService {
     this.bookingInfoList = [];
 
     for (let i = 0; i < 10; i++) {
-      const bookingInfo = this.fakeData();
-      bookingInfo['id'] = i;
-      bookingInfo['dateOfBirth'] = '11-16-2020';
-
+      const bookingInfo = { id: i, ...this.fakeData() };
 
       this.bookingInfoList.push(bookingInfo);
     }
@@ -36,6 +33,7 @@ export class BookingInfoListService {
     return {
       firstName: faker.name.firstName(),
       lastName: faker.name.firstName(),
+      dateOfBirth: '11-16-2020',
       email: faker.internet.email(),
       password: faker.internet.password()
     }

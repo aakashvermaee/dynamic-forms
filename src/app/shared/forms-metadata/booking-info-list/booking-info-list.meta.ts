@@ -33,5 +33,6 @@ export default new FormGroup({
   ]),
   password: new FormControl("", [
     Validators.required,
-    Validators.pattern("^[A-Za-z][A-Za-z0-9]*$")])
+    Validators.pattern("^[A-Za-z][A-Za-z0-9]*$")
+  ])
 });
