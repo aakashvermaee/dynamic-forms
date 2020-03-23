@@ -13,7 +13,6 @@ import BookingInfo from '../../../shared/forms-metadata/booking-info-list/bookin
   styleUrls: ['./booking-info-list.component.scss']
 })
 export class BookingInfoListComponent implements OnInit {
-  public bookingInfoListForm: FormGroup;
   public bookingInfoLists: FormArray;
 
   constructor(
@@ -22,9 +21,9 @@ export class BookingInfoListComponent implements OnInit {
   ) {
     this.initFormGroup();
   }
-
-  get BookingInfoListFormValue() {
-    return this.bookingInfoListForm.get('bookingInfoLists').value;
+  
+  get BookingInfoListsFormValue() {
+    return this.bookingInfoLists.value;
   }
 
   ngOnInit() {
@@ -36,9 +35,7 @@ export class BookingInfoListComponent implements OnInit {
   }
 
   initFormGroup() {
-    this.bookingInfoListForm = this.fb.group({
-      bookingInfoLists: this.fb.array([this.createBookingInfoForm()])
-    });
+    this.bookingInfoLists = this.fb.array([]);
   }
 
   createBookingInfoForm(bookingInfo?) {
@@ -46,17 +43,16 @@ export class BookingInfoListComponent implements OnInit {
   }
 
   addBookingInfo(bookingInfo?) {
-    this.bookingInfoLists = this.bookingInfoListForm.get('bookingInfoLists') as FormArray;
+    this.bookingInfoLists = this.bookingInfoLists as FormArray;
     this.bookingInfoLists.push(this.createBookingInfoForm(bookingInfo));
   }
 
   getBookingInfoList() {
-    (this.bookingInfoListForm.get('bookingInfoLists') as FormArray).removeAt(0);
-
-    const newValues = this.bookingInfoListService.getBookingInfoList(this.BookingInfoListFormValue);
+    const newValues = this.bookingInfoListService.getBookingInfoList(this.BookingInfoListsFormValue);
 
     for (let bookingInfo of newValues) {
       this.addBookingInfo(bookingInfo);
     }
+    // console.log(this.bookingInfoLists)
   }
 }

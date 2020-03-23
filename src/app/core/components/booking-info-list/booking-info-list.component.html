@@ -12,43 +12,94 @@
   </div>
 </form> -->
 
-<form [formGroup]="bookingInfoListForm">
-  <h2 style="align-items: center; justify-content: center; text-align: center;">Dynamic Table</h2>
+<!-- <form [formGroup]="bookingInfoListForm"> -->
+<!-- <h2 style="align-items: center; justify-content: center; text-align: center;">Dynamic Table</h2>
   <div class="container" style="align-items: center; justify-content: center;">
     <div class="row">
       <div class="col-2"
-        *ngFor="let header of bookingInfoListForm.controls.bookingInfoLists.controls[0].value | headers">
+        *ngFor="let header of bookingInfoLists.controls[0].value | headers">
         {{header}}
       </div>
     </div>
-  </div>
-  <div class="contianer">
-    <div formArrayName="bookingInfoLists"
-      *ngFor="let bookingInfo of bookingInfoListForm.controls.bookingInfoLists.controls; let i = index;">
-      <div formGroupName="{{i}}">
-        <div class="container">
+  </div> -->
+<!-- <div class="contianer">
+    <div *ngFor="let bookingInfo of bookingInfoLists.controls; index as i;"> -->
+<!-- <div formGroupName="{{i}}"> -->
+<!-- <div class="container">
           <div class="row">
             <div class="col-2">
-              <input [id]=" bookingInfo.id" type="text" formControlName="id" />
+              <input type="text" [formControl]="bookingInfoLists.controls[i]" />
             </div>
             <div class="col-2">
-              <input type="text" formControlName="firstName" />
+              <input type="text" [formControl]="bookingInfoLists.controls[i]" />
             </div>
             <div class="col-2">
-              <input type="text" formControlName="lastName" />
+              <input type="text" [formControl]="bookingInfoLists.controls[i]" />
             </div>
             <div class="col-2">
-              <input type="text" formControlName="dateOfBirth" />
+              <input type="text" [formControl]="bookingInfoLists.controls[i]" />
             </div>
             <div class="col-2">
-              <input type="text" formControlName="email" />
+              <input type="text" [formControl]="bookingInfoLists.controls[i]" />
             </div>
             <div class="col-2">
-              <input type="text" formControlName="password" />
+              <input type="text" [formControl]="bookingInfoLists.controls[i]" />
             </div>
           </div>
+        </div> -->
+<!-- </div> -->
+<!-- </div>
+  </div> -->
+<!-- </form> -->
+
+<ng-container>
+  <h2 style="align-items: center; justify-content: center; text-align: center;">
+    Dynamic Table
+  </h2>
+  <div class="container" style="align-items: center; justify-content: center;">
+    <div class="row">
+      <div
+        class="col-2"
+        *ngFor="let header of bookingInfoLists.controls[0].value | headers"
+      >
+        {{ header }}
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div *ngFor="let bookingInfo of bookingInfoLists.controls; index as i">
+      <div class="row">
+        <div class="col-2">
+          <input type="text" [formControl]="bookingInfo.controls.id" />
+        </div>
+        <div class="col-2">
+          <input
+            type="text"
+            [formControl]="bookingInfo.controls.firstName"
+          />
+        </div>
+        <div class="col-2">
+          <input
+            type="text"
+            [formControl]="bookingInfo.controls.lastName"
+          />
+        </div>
+        <div class="col-2">
+          <input
+            type="text"
+            [formControl]="bookingInfo.controls.dateOfBirth"
+          />
+        </div>
+        <div class="col-2">
+          <input type="text" [formControl]="bookingInfo.controls.email" />
+        </div>
+        <div class="col-2">
+          <input
+            type="text"
+            [formControl]="bookingInfo.controls.password"
+          />
         </div>
       </div>
     </div>
   </div>
-</form>
+</ng-container>
