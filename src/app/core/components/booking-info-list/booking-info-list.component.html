@@ -1,0 +1,67 @@
+<!-- <form [formGroup]="bookingInfoListForm">
+  <div formArrayName="bookingInfoLists"
+    *ngFor="let bookingInfo of bookingInfoListForm.controls.bookingInfoLists.controls; let i = index;">
+    <div formGroupName="{{i}}">
+      <div class="form-group">
+        <label for="firstName">id</label>
+        <input [id]="bookingInfo.id" type="text" formControlName="id" />
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" />
+      </div>
+    </div>
+  </div>
+</form> -->
+
+<form [formGroup]="bookingInfoListForm">
+  <div class="container">
+    <div class="row">
+      <div class="col-1">
+        id
+      </div>
+      <div class="col-1">
+        First Name
+      </div>
+      <div class="col-1">
+        Last Name
+      </div>
+      <div class="col-1">
+        DOB
+      </div>
+      <div class="col-2">
+        Email
+      </div>
+      <div class="col-1">
+        Password
+      </div>
+    </div>
+  </div>
+  <div class="contianer">
+    <div formArrayName="bookingInfoLists"
+      *ngFor="let bookingInfo of bookingInfoListForm.controls.bookingInfoLists.controls; let i = index;">
+      <div formGroupName="{{i}}">
+        <div class="container">
+          <div class="row">
+            <div class="col-1">
+              <input [id]=" bookingInfo.id" type="text" formControlName="id" />
+            </div>
+            <div class="col-1">
+              <input type="text" formControlName="firstName" />
+            </div>
+            <div class="col-1">
+              <input type="text" formControlName="lastName" />
+            </div>
+            <div class="col-1">
+              <input type="text" formControlName="dateOfBirth" />
+            </div>
+            <div class="col-2">
+              <input type="text" formControlName="email" />
+            </div>
+            <div class="col-1">
+              <input type="text" formControlName="password" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
