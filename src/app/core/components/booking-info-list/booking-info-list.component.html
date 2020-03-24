@@ -52,16 +52,13 @@
   </div> -->
 <!-- </form> -->
 
-<ng-container>
+<!-- <ng-container>
   <h2 style="align-items: center; justify-content: center; text-align: center;">
     Dynamic Table
   </h2>
   <div class="container" style="align-items: center; justify-content: center;">
     <div class="row">
-      <div
-        class="col-2"
-        *ngFor="let header of bookingInfoLists.controls[0].value | headers"
-      >
+      <div class="col-2" *ngFor="let header of bookingInfoLists.controls[0].value.booking | headers">
         {{ header }}
       </div>
     </div>
@@ -73,33 +70,54 @@
           <input type="text" [formControl]="bookingInfo.controls.id" />
         </div>
         <div class="col-2">
-          <input
-            type="text"
-            [formControl]="bookingInfo.controls.firstName"
-          />
+          <input type="text" [formControl]="bookingInfo.controls.firstName" />
         </div>
         <div class="col-2">
-          <input
-            type="text"
-            [formControl]="bookingInfo.controls.lastName"
-          />
+          <input type="text" [formControl]="bookingInfo.controls.lastName" />
         </div>
         <div class="col-2">
-          <input
-            type="text"
-            [formControl]="bookingInfo.controls.dateOfBirth"
-          />
+          <input type="text" [formControl]="bookingInfo.controls.dateOfBirth" />
         </div>
         <div class="col-2">
           <input type="text" [formControl]="bookingInfo.controls.email" />
         </div>
         <div class="col-2">
-          <input
-            type="text"
-            [formControl]="bookingInfo.controls.password"
-          />
+          <input type="text" [formControl]="bookingInfo.controls.password" />
         </div>
       </div>
     </div>
   </div>
-</ng-container>
+</ng-container> -->
+
+<!-- <table border="1">
+  <th *ngFor="let header of bookingInfoLists.controls[0].value.booking | headers">
+    {{ header }}
+  </th>
+  <tbody>
+    <tr *ngFor="let bookingInfo of bookingInfoLists.controls; index as i">
+      <label [formControl]="bookingInfo.controls.booking.value.id"></label>
+    </tr>
+  </tbody>
+</table> -->
+
+<!-- <table border="1">
+  <th *ngFor="let header of bookingInfoList.controls[0].value.booking | headers">
+    {{ header }}
+  </th>
+  <tbody>
+    <tr *ngFor="let bookingInfo of bookingInfoList.value; index as i">
+      <label>{{bookingInfo.booking.id}}</label>
+    </tr>
+  </tbody>
+</table> -->
+
+<!-- <table border="1">
+  <th *ngFor="let header of bookingInfoList.controls[0].value.booking | headers">
+    {{ header }}
+  </th>
+  <tbody>
+    <tr *ngFor="let bookingInfoFormGroup of bookingInfoList.controls; index as i">
+      <input type="text" [formControl]="bookingInfoFormGroup.controls.id" />
+    </tr>
+  </tbody>
+</table> -->

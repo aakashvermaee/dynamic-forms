@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 
 // Services
 import { BookingInfoListService } from '../../services/booking-info-list.service';
@@ -13,7 +13,7 @@ import BookingInfo from '../../../shared/forms-metadata/booking-info-list/bookin
   styleUrls: ['./booking-info-list.component.scss']
 })
 export class BookingInfoListComponent implements OnInit {
-  public bookingInfoLists: FormArray;
+  public bookingInfoList: FormArray;
 
   constructor(
     private fb: FormBuilder,
@@ -21,9 +21,9 @@ export class BookingInfoListComponent implements OnInit {
   ) {
     this.initFormGroup();
   }
-  
-  get BookingInfoListsFormValue() {
-    return this.bookingInfoLists.value;
+
+  get BookingInfoListFormValue() {
+    return this.bookingInfoList.value;
   }
 
   ngOnInit() {
@@ -35,24 +35,30 @@ export class BookingInfoListComponent implements OnInit {
   }
 
   initFormGroup() {
-    this.bookingInfoLists = this.fb.array([]);
+    this.bookingInfoList = this.fb.array([]);
   }
 
   createBookingInfoForm(bookingInfo?) {
-    return this.fb.group(bookingInfo ? bookingInfo : BookingInfo);
+    return this.fb.group(bookingInfo || {} as FormControl);
   }
 
   addBookingInfo(bookingInfo?) {
-    this.bookingInfoLists = this.bookingInfoLists as FormArray;
-    this.bookingInfoLists.push(this.createBookingInfoForm(bookingInfo));
+    this.bookingInfoList = this.bookingInfoList as FormArray;
+    // const bookingInfoFG = this.createBookingInfoForm(bookingInfo);
+    this.bookingInfoList.push(bookingInfo);
   }
 
   getBookingInfoList() {
-    const newValues = this.bookingInfoListService.getBookingInfoList(this.BookingInfoListsFormValue);
+    const newValues = this.bookingInfoListService.getBookingInfoList(this.BookingInfoListFormValue);
 
     for (let bookingInfo of newValues) {
       this.addBookingInfo(bookingInfo);
     }
-    // console.log(this.bookingInfoLists)
+
+    // this.bookingInfoList = this.bookingInfoList as FormArray;
+
+    this.bookingInfoList.patchValue(newValues);
+
+    console.log(this.bookingInfoList);
   }
 }
