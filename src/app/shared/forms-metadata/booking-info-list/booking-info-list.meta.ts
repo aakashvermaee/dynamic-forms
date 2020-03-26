@@ -1,331 +1,123 @@
-import { Validators, FormControl, FormGroup } from "@angular/forms";
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
-/* export default {
-  id: [
-    {
-      id: ""
-    }
-  ],
-  firstName: [{ value: "" }, [Validators.required]],
-  lastName: [{ value: "" }, [Validators.required]],
-  dateOfBirth: [{ value: "" }, [Validators.required]],
-  email: [
-    { value: "" },
-    [
-      Validators.required,
-      Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/)
-    ]
-  ],
-  password: [
-    { value: "" },
-    [Validators.required, Validators.pattern("^[A-Za-z][A-Za-z0-9]*$")]
-  ]
-}; */
-
-/* export default new FormGroup({
-  id: new FormControl('', [Validators.required]),
-  firstName: new FormControl('', [Validators.required]),
-  lastName: new FormControl("", [Validators.required]),
-  dateOfBirth: new FormControl("", [Validators.required]),
-  email: new FormControl("", [
-    Validators.required,
-    Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/)
-  ]),
-  password: new FormControl("", [
-    Validators.required,
-    Validators.pattern("^[A-Za-z][A-Za-z0-9]*$")
-  ])
-}); */
-
-/* export default interface BookingInfo {
-  id: string;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string;
-  email: string;
-  password: string;
-} */
-
-export default interface BookingAndHotel {
-  booking: BookingDetails,
-  hotel: Hotel
-}
-
-export interface Hotel {
-  id: string;
-  name: string;
-  address: Address;
-  image_url: string;
-  terms_and_conditions: string
-  timezone: string
-}
-
-export interface BookingDetails {
-  id: string;
-  arrival_time: number;
-  departure_time: number;
-  check_in_time: number;
-  pre_check_in_status: string;
-  check_in_status: string;
-  booking_status: string;
-  card_details: CardDetails;
-  primary_guest?: (GuestsEntity) | null;
-  accompany_guests?: (GuestsEntity)[] | null;
-  shared_guests?: (GuestsEntity)[] | null;
-  face_recognition_guest_id?: null;
-  pay_at_desk: boolean
-  confirmation_number?: string;
-  steps_completed: number;
-  special_amenities: (SpecialAmenities)[] | null;
-  special_remarks: string;
-  room?: (RoomEntity)[] | null;
-  room_inclusion: (RoomInclusion)[] | null;
-  flight_details: FlightDetails;
-  kids?: [];
-  no_of_kids: number
-}
-
-export interface RoomInclusion {
-  inclusion: string
-}
-
-export interface SpecialAmenities {
-  id: string;
-  amenity: string;
-  rate: number;
-  quantity: number;
-  package_code: string;
-  start_date: number;
-  end_date: number;
-  booking_id: string
-}
-
-export interface GuestUploads {
-  id: string
-  document_number: string;
-  document_type: string;
-  issue_place: string;
-  issue_date: number;
-  front_url?: string | null;
-  back_url?: string | null;
-  signature_url?: null;
-}
-
-export interface FlightDetails {
-  id: string;
-  number: string;
-  date: number;
-  arrival_time: number;
-  departure_time: number;
-  arrival_transportation_required: boolean;
-  departure_transportation_required: boolean
-}
-
-
-export interface RoomEntity {
-  id: string;
-  type: string;
-  room_number: number;
-  room_rate: number;
-  room_status: string
-}
-
-export interface CardDetails {
-  id: string;
-  number: number;
-  holder_name: string;
-  expiry_date: string;
-}
-
-export interface GuestsEntity {
-  id: string;
-  isd_code: number;
-  contact_number: string;
-  email_id: string;
-  first_name: string;
-  last_name: string
-  title: string;
-  nationality: string;
-  is_vip: boolean;
-  guest_uploads: GuestUploads;
-  date_of_birth: number;
-  document_name_validation?: null;
-  document_image_validation?: null;
-  image_url?: string | null;
-  address: Address
-}
-
-export interface Address {
-  id: string;
-  city: string;
-  country: string;
-}
-
-export interface DocumentTypeI {
-  type: string
-}
-
-export interface PersonalInfoI {
-  id: string;
-  title: string;
-  nationality: string;
-  frro: boolean;
-  vip: boolean;
-  first_name: string;
-  last_name: string;
-  is_vip: boolean;
-  guest_uploads?: GuestUploads;
-  date_of_birth: number;
-  is_frro: boolean;
-  isd_code: number;
-  contact_number: string;
-  email_id: string;
-  address: Address;
-  signature_url?: string;
-  regcard_url?: string;
-  image_url?: string;
-  booking_id: string;
-}
-
-export interface PersonalInfoFormGroupI {
-  date_of_birth: number;
-  id: string;
-  first_name: string;
-  last_name: string;
-  email_id: string;
-  isd_code: number;
-  contact_number: string;
-  title: string;
-}
-
-export interface StayDetailsI {
-  id: string;
-  arrival_time: number;
-  departure_time: number;
-  check_in_time: number;
-  pre_check_in_status: string;
-  check_in_status: string;
-  booking_status: string;
-  card_details: CardDetails;
-  primary_guest?: (GuestsEntity) | null;
-  accompany_guests?: (GuestsEntity)[] | null;
-  shared_guests?: (GuestsEntity)[] | null;
-  face_recognition_guest_id?: null;
-  pay_at_desk: boolean
-  confirmation_number?: string;
-  steps_completed: number;
-  special_amenities: (SpecialAmenities)[] | null;
-  special_remarks: string;
-  room?: (RoomEntity)[] | null;
-  room_inclusion: (RoomInclusion)[] | null;
-  flight_details: FlightDetails;
-  kids?: [];
-  no_of_kids: number
-}
-
-export interface ImageUploadResponseI {
-  file_download_url: string;
-  file_name: string;
-  file_type: string;
-  size: string
-}
-
-export interface UploadDocI {
-  id: string;
-  arrival_time: number;
-  departure_time: number;
-  check_in_time: number;
-  pre_check_in_status: string;
-  check_in_status: string;
-  booking_status: string;
-  card_details: CardDetails;
-  primary_guest?: (GuestsEntity) | null;
-  accompany_guests?: (GuestsEntity)[] | null;
-  shared_guests?: (GuestsEntity)[] | null;
-  face_recognition_guest_id?: null;
-  pay_at_desk: boolean
-  confirmation_number?: string;
-  steps_completed: number;
-  special_amenities: (SpecialAmenities)[] | null;
-  special_remarks: string;
-  room?: (RoomEntity)[] | null;
-  room_inclusion: (RoomInclusion)[] | null;
-  flight_details: FlightDetails;
-  kids?: [];
-  no_of_kids: number
-}
-
-export interface GuestDetailsCustomI {
-  primary_guest?: [];
-  secondary_guests?: []
-}
-
-export interface GuestStayDetailsCustomI {
-  id?: string;
-  arrivalDate?: Date | '';
-  departureDate?: Date | '';
-  checkInTime?: Date;
-  timezone?: string;
-  adultsCount?: number;
-  kidsCount?: number
-}
-
-export interface CardDetailsCustomI {
-  id?: string;
-  number?: string | number;
-  holder_name?: string;
-  expiry_date?: string;
-  paymentType?: string
-}
-
-export interface UpdatedStayDetailsCustomI {
-  arrival_date?: number;
-  departure_date?: number;
-  check_in_time?: number;
-  id?: string;
-  time_zone?: string;
-  no_of_adults?: number;
-  no_of_children?: number;
-}
-
-export interface PrefrencesCustomI {
-  bookingId?: string;
-  room_rate?: number | string | null;
-  roomType?: string | null;
-  room_inclusions?: string | null;
-  special_amenities?: string | null;
-  special_remarks?: string | null;
-  number?: string | null;
-  date?: Date | ''
-}
-
-export interface GuestDsCustomI {
-  id?: string;
-  guests?: (GuestFGCustomI)[]
-}
-
-interface GuestFGCustomI {
-  id?: string;
-  firstName?: string;
-  lastName?: string;
-  dateOfBirth?: Date | '';
-  nationality?: string;
-  title?: string;
-  docType?: string;
-  frontURL?: string;
-  backURL?: string;
-  placeOfIssue?: string;
-  imgURL?: string;
-  isSkip?: boolean;
-  visaURL?: string;
-}
-
-export interface PersonalInfoCustomI {
-  date_of_birth?;
-  id?: string;
-  first_name?: string;
-  last_name?: string;
-  email_id?: string;
-  isd_code?: string;
-  contact_number?: string
-}
+export default new FormGroup({
+  booking: new FormGroup({
+    id: new FormControl('', []),
+    arrival_time: new FormControl(undefined, []),
+    departure_time: new FormControl(undefined, []),
+    check_in_time: new FormControl(undefined, []),
+    pre_check_in_status: new FormControl('', []),
+    check_in_status: new FormControl('', []),
+    booking_status: new FormControl('', []),
+    card_details: new FormGroup({
+      id: new FormControl('', []),
+      expiry_date: new FormControl('', []),
+      holder_name: new FormControl(undefined, []),
+      number: new FormControl(0, [])
+    }),
+    primary_guest: new FormGroup({
+      id: new FormControl('', []),
+      isd_code: new FormControl(0, []),
+      contact_number: new FormControl('', []),
+      email_id: new FormControl('', []),
+      first_name: new FormControl('', []),
+      last_name: new FormControl('', []),
+      title: new FormControl('', []),
+      nationality: new FormControl('', []),
+      is_vip: new FormControl(undefined, []),
+      guest_uploads: new FormGroup({
+        id: new FormControl('', []),
+        document_number: new FormControl('', []),
+        document_type: new FormControl('', []),
+        front_url: new FormControl('', []),
+        back_url: new FormControl('', []),
+        signature_url: new FormControl('', []),
+        issue_date: new FormControl(undefined, []),
+        issue_place: new FormControl('', [])
+      }),
+      address: new FormGroup({
+        city: new FormControl('', []),
+        id: new FormControl('', []),
+        country: new FormControl('', [])
+      })
+      ,
+      date_of_birth: new FormControl(undefined, []),
+      image_url: new FormControl('', [])
+    }),
+    accompany_guests: new FormArray([new FormGroup({
+      id: new FormControl('', []),
+      isd_code: new FormControl(0, []),
+      contact_number: new FormControl(0, []),
+      email_id: new FormControl('', []),
+      first_name: new FormControl('', []),
+      last_name: new FormControl('', []),
+      title: new FormControl('', []),
+      nationality: new FormControl('', []),
+      is_vip: new FormControl(undefined, []),
+      guest_uploads: new FormGroup({
+        id: new FormControl('', []),
+        document_number: new FormControl('', []),
+        document_type: new FormControl('', []),
+        front_url: new FormControl('', []),
+        back_url: new FormControl('', []),
+        signature_url: new FormControl('', []),
+        issue_date: new FormControl(0, []),
+        issue_place: new FormControl('', [])
+      }),
+      address: new FormGroup({
+        city: new FormControl('', []),
+        id: new FormControl('', []),
+        country: new FormControl('', [])
+      }),
+      date_of_birth: new FormControl(0, []),
+      image_url: new FormControl('', [])
+    })]),
+    pay_at_desk: new FormControl(undefined, []),
+    confirmation_number: new FormControl('', []),
+    steps_completed: new FormControl(0, []),
+    special_amenities: new FormArray([new FormGroup({
+      id: new FormControl('', []),
+      amenity: new FormControl('', []),
+      rate: new FormControl('', []),
+      quantity: new FormControl('', []),
+      package_code: new FormControl('', []),
+      start_date: new FormControl('', []),
+      end_date: new FormControl('', []),
+      booking_id: new FormControl('', [])
+    })]),
+    special_remarks: new FormControl('', []),
+    room: new FormArray([new FormGroup({
+      id: new FormControl('', []),
+      room_number: new FormControl(0, []),
+      room_rate: new FormControl(0, []),
+      room_status: new FormControl('', []),
+      type: new FormControl('', [])
+    })
+    ]),
+    room_inclusion: new FormArray([new FormGroup({
+      inclusion: new FormControl('', [])
+    })]),
+    flight_details: new FormGroup({
+      id: new FormControl('', []),
+      number: new FormControl(0, []),
+      date: new FormControl(0, []),
+      arrival_time: new FormControl(0, []),
+      departure_time: new FormControl(0, []),
+      arrival_transportation_required: new FormControl(undefined, []),
+      departure_transportation_required: new FormControl(undefined, [])
+    }),
+    no_of_kids: new FormControl(0, [])
+  }),
+  hotel: new FormGroup({
+    id: new FormControl('', []),
+    address: new FormGroup({
+      city: new FormControl('', []),
+      id: new FormControl('', []),
+      country: new FormControl('', [])
+    }),
+    image_url: new FormControl('', []),
+    name: new FormControl('', []),
+    terms_and_conditions: new FormControl('', []),
+    timezone: new FormControl('', [])
+  })
+});

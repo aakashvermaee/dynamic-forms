@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
 
 // Services
 import { BookingInfoListService } from '../../services/booking-info-list.service';
 
-// Models
+// Form Model
 import BookingInfo from '../../../shared/forms-metadata/booking-info-list/booking-info-list.meta';
+
+// Model
+import BookingInfoModel from '../../../shared/models/booking-info-list/booking-info-list.model';
 
 @Component({
   selector: 'app-booking-info-list',
@@ -23,7 +26,7 @@ export class BookingInfoListComponent implements OnInit {
   }
 
   get BookingInfoListFormValue() {
-    return this.bookingInfoList.value;
+    return this.bookingInfoList as FormArray;
   }
 
   ngOnInit() {
@@ -35,29 +38,31 @@ export class BookingInfoListComponent implements OnInit {
   }
 
   initFormGroup() {
-    this.bookingInfoList = this.fb.array([]);
+    this.bookingInfoList = this.fb.array([BookingInfo]);
   }
 
-  createBookingInfoForm(bookingInfo?) {
-    return this.fb.group(bookingInfo || {} as FormControl);
-  }
+  /* createBookingInfoForm(bookingInfo?) {
+    return this.fb.group(bookingInfo || this.fb.control('', []));
+  } */
 
-  addBookingInfo(bookingInfo?) {
+  addBookingInfo(bookingInfoList?) {
     this.bookingInfoList = this.bookingInfoList as FormArray;
-    // const bookingInfoFG = this.createBookingInfoForm(bookingInfo);
-    this.bookingInfoList.push(bookingInfo);
+
+    for (const bookingInfo of bookingInfoList) {
+      // this.bookingInfoList.push(new FormGroup(bookingInfo));
+      this.bookingInfoList.patchValue(bookingInfo);
+    }
   }
 
   getBookingInfoList() {
-    const newValues = this.bookingInfoListService.getBookingInfoList(this.BookingInfoListFormValue);
+    const newValues: BookingInfoModel[] = this.bookingInfoListService.getBookingInfoList(this.BookingInfoListFormValue);
 
-    for (let bookingInfo of newValues) {
-      this.addBookingInfo(bookingInfo);
-    }
+    // this.addBookingInfo(newValues);
 
-    // this.bookingInfoList = this.bookingInfoList as FormArray;
+    // this.bookingInfoList.patchValue(newValues);
 
-    this.bookingInfoList.patchValue(newValues);
+    this.bookingInfoList = this.bookingInfoList as FormArray;
+    this.bookingInfoList.setValue(newValues);
 
     console.log(this.bookingInfoList);
   }

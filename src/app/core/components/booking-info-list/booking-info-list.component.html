@@ -121,3 +121,22 @@
     </tr>
   </tbody>
 </table> -->
+
+<!-- <form [formGroup]="bookingInfoList">
+  <table>
+    <th *ngFor="let header of bookingInfoList.value[0].booking | headers">
+      {{ header }}
+    </th>
+    <tbody>
+      <tr *ngFor="let bookingInfoFormGroup of bookingInfoList.controls">
+        <div [formGroup]="bookingInfoFormGroup">
+          <div [formGroup]="bookingInfoFormGroup.controls.booking">
+            <input type="text" formControlName="id" />
+          </div>
+          <div [formGroup]="bookingInfoFormGroup.controls.hotel">
+          </div>
+        </div>
+      </tr>
+    </tbody>
+  </table>
+</form> -->
