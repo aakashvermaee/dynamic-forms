@@ -4,7 +4,6 @@ import { FakerDataService } from './fake-data.service';
 
 // Models
 import BookingInfo from '../../shared/models/booking-info-list/booking-info-list.model';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +23,7 @@ export class BookingInfoListService {
   public setBookingInfoList() {
     this.bookingInfoList = [];
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 15; i++) {
       const bookingInfo: BookingInfo = this.faker.fakeData(i);
       this.bookingInfoList.push(bookingInfo);
     }

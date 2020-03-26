@@ -1,6 +1,6 @@
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
-export default new FormGroup({
+export default {
   booking: new FormGroup({
     id: new FormControl('', []),
     arrival_time: new FormControl(undefined, []),
@@ -120,4 +120,4 @@ export default new FormGroup({
     terms_and_conditions: new FormControl('', []),
     timezone: new FormControl('', [])
   })
-});
+};

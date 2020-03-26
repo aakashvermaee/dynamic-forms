@@ -114,18 +114,6 @@ export class FakerDataService {
           departure_transportation_required: false
         },
         no_of_kids: 0
-      },
-      hotel: {
-        id: faker.random.uuid(),
-        address: {
-          city: faker.address.city(),
-          id: faker.random.uuid(),
-          country: faker.address.country()
-        },
-        image_url: faker.image.imageUrl(),
-        name: faker.random.words(),
-        terms_and_conditions: faker.lorem.sentence(),
-        timezone: 'IST'
       }
     };
 

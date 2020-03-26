@@ -9,6 +9,8 @@ import BookingInfo from '../../../shared/forms-metadata/booking-info-list/bookin
 
 // Model
 import BookingInfoModel from '../../../shared/models/booking-info-list/booking-info-list.model';
+import BookingInfoListMeta from '../../../shared/forms-metadata/booking-info-list/booking-info-list.meta';
+import bookingInfoListMeta from '../../../shared/forms-metadata/booking-info-list/booking-info-list.meta';
 
 @Component({
   selector: 'app-booking-info-list',
@@ -38,31 +40,27 @@ export class BookingInfoListComponent implements OnInit {
   }
 
   initFormGroup() {
-    this.bookingInfoList = this.fb.array([BookingInfo]);
+    this.bookingInfoList = this.fb.array([]);
   }
 
-  /* createBookingInfoForm(bookingInfo?) {
-    return this.fb.group(bookingInfo || this.fb.control('', []));
-  } */
+  createBookingInfoForm(bookingInfo?) {
+    return this.fb.group(BookingInfoListMeta);
+  }
 
-  addBookingInfo(bookingInfoList?) {
+  addBookingInfo(bookingInfoList?: BookingInfoModel[]) {
     this.bookingInfoList = this.bookingInfoList as FormArray;
 
-    for (const bookingInfo of bookingInfoList) {
-      // this.bookingInfoList.push(new FormGroup(bookingInfo));
-      this.bookingInfoList.patchValue(bookingInfo);
+    for (let i = 0; i < bookingInfoList.length; i++) {
+      this.bookingInfoList.push(this.createBookingInfoForm());
     }
+
+    this.bookingInfoList.patchValue(bookingInfoList);
   }
 
   getBookingInfoList() {
     const newValues: BookingInfoModel[] = this.bookingInfoListService.getBookingInfoList(this.BookingInfoListFormValue);
 
-    // this.addBookingInfo(newValues);
-
-    // this.bookingInfoList.patchValue(newValues);
-
-    this.bookingInfoList = this.bookingInfoList as FormArray;
-    this.bookingInfoList.setValue(newValues);
+    this.addBookingInfo(newValues);
 
     console.log(this.bookingInfoList);
   }

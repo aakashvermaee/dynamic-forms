@@ -1,15 +1,5 @@
 export default interface BookingAndHotel {
-  booking: BookingDetails,
-  hotel: Hotel
-}
-
-export interface Hotel {
-  id: string;
-  name: string;
-  address: Address;
-  image_url: string;
-  terms_and_conditions: string;
-  timezone: string;
+  booking: BookingDetails
 }
 
 export interface BookingDetails {
