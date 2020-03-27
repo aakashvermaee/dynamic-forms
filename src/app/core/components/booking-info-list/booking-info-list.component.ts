@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, FormArray } from '@angular/forms';
 
 // Services
 import { BookingInfoListService } from '../../services/booking-info-list.service';
 
-// Form Model
-import BookingInfo from '../../../shared/forms-metadata/booking-info-list/booking-info-list.meta';
-
 // Model
 import BookingInfoModel from '../../../shared/models/booking-info-list/booking-info-list.model';
 import BookingInfoListMeta from '../../../shared/forms-metadata/booking-info-list/booking-info-list.meta';
-import bookingInfoListMeta from '../../../shared/forms-metadata/booking-info-list/booking-info-list.meta';
 
 @Component({
   selector: 'app-booking-info-list',
@@ -24,7 +20,7 @@ export class BookingInfoListComponent implements OnInit {
     private fb: FormBuilder,
     private bookingInfoListService: BookingInfoListService
   ) {
-    this.initFormGroup();
+    this.initFormArray();
   }
 
   get BookingInfoListFormValue() {
@@ -39,7 +35,7 @@ export class BookingInfoListComponent implements OnInit {
     });
   }
 
-  initFormGroup() {
+  initFormArray() {
     this.bookingInfoList = this.fb.array([]);
   }
 
